@@ -20,12 +20,25 @@ public partial class ModuleWeaver
     public void Execute()
     {
         var allTypes = ModuleDefinition.GetTypes().Where(x => x.IsClass).ToList();
+        try
+        {
+            templateFinder = new ValidationTemplateFinder
+                                 {
+                                     AllTypes = allTypes
+                                 };
+            templateFinder.Execute();
+        }
+        catch(WeavingException)
+        {
+            var refTypes = GetTypesFromAttributeAssembly(allTypes);
+            templateFinder = new ValidationTemplateFinder
+                                {
+                                    AllTypes = refTypes
+                                };
+            templateFinder.Execute();
+        }
         
-        templateFinder = new ValidationTemplateFinder
-                             {
-                                 AllTypes= allTypes
-                             };
-        templateFinder.Execute();
+
         dataErrorInfoFinder = new DataErrorInfoFinder
                                   {
                                       ValidationTemplateFinder = templateFinder,
@@ -46,6 +59,26 @@ public partial class ModuleWeaver
         }
         ProcessTypes(allTypes);
         RemoveReference();
+    }
+
+    public List<TypeDefinition> GetTypesFromAttributeAssembly(List<TypeDefinition> allTypes)
+    {
+        int i = 0;
+        TypeDefinition def = null;
+        while (def == null && i < allTypes.Count)
+        {
+            if (allTypes[i].CustomAttributes.Any(x => x.Constructor.DeclaringType.Name == "InjectValidationAttribute"))
+            {
+                def = allTypes[i];
+            }
+            i++;
+        }
+        if(def != null)
+        {
+            var attribute = def.CustomAttributes.First(x => x.Constructor.DeclaringType.Name == "InjectValidationAttribute");
+            return attribute.AttributeType.Module.GetTypes().Where(x => x.IsClass).ToList();
+        }
+        return null;
     }
 
     public void ProcessTypes(List<TypeDefinition> allTypes)

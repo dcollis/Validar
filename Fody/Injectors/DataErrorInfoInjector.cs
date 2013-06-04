@@ -94,10 +94,17 @@ public class DataErrorInfoInjector
         var body = constructor.Body;
         body.SimplifyMacros();
         body.MakeLastStatementReturn();
+        MethodReference mref = templateConstructor.GetElementMethod();
+        if(templateConstructor.DeclaringType.HasGenericParameters)
+        {
+            var genericType = templateConstructor.DeclaringType.MakeGenericInstanceType(TypeDefinition.GetElementType());
+            mref = genericType.Resolve().Methods.First().MakeHostInstanceGeneric(TypeDefinition.GetElementType());
+        }
+        
         body.Instructions.BeforeLast(
             Instruction.Create(OpCodes.Ldarg_0),
             Instruction.Create(OpCodes.Ldarg_0),
-            Instruction.Create(OpCodes.Newobj, templateConstructor),
+            Instruction.Create(OpCodes.Newobj, mref),
             Instruction.Create(OpCodes.Stfld, validationTemplateField)
             );
         body.OptimizeMacros();
@@ -107,4 +114,6 @@ public class DataErrorInfoInjector
     {
         validationTemplateField = TemplateFieldInjector.AddField(DataErrorInfoFinder.InterfaceRef, TypeDefinition);
     }
+
+    
 }

@@ -1,5 +1,6 @@
 using System.Linq;
 using Mono.Cecil;
+using Mono.Cecil.Rocks;
 using Mono.Collections.Generic;
 
 public static class CecilExtensions
@@ -22,6 +23,33 @@ public static class CecilExtensions
         {
             throw new WeavingException(string.Format("Field '{0}' could not be re-used because it is not the correct type. Expected '{1}'.", targetReference.Name, expectedType.Name));
         }
+    }
+
+    public static MethodReference MakeHostInstanceGeneric(
+                                  this MethodReference self,
+                                  params TypeReference[] args)
+    {
+        var reference = new MethodReference(
+            self.Name,
+            self.ReturnType,
+            self.DeclaringType.MakeGenericInstanceType(args))
+        {
+            HasThis = self.HasThis,
+            ExplicitThis = self.ExplicitThis,
+            CallingConvention = self.CallingConvention
+        };
+
+        foreach (var parameter in self.Parameters)
+        {
+            reference.Parameters.Add(new ParameterDefinition(parameter.ParameterType));
+        }
+
+        foreach (var genericParam in self.GenericParameters)
+        {
+            reference.GenericParameters.Add(new GenericParameter(genericParam.Name, reference));
+        }
+
+        return reference;
     }
 
 }

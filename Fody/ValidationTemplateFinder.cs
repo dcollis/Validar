@@ -12,7 +12,7 @@ public class ValidationTemplateFinder
 
     public void Execute()
     {
-        TypeDefinition = AllTypes.FirstOrDefault(x => x.Name == "ValidationTemplate");
+        TypeDefinition = AllTypes.FirstOrDefault(x => x.Name == "ValidationTemplate" || x.Name == "ValidationTemplate`1");
         if (TypeDefinition== null)
         {
             throw new WeavingException("Could not find a type named ValidationTemplate");
