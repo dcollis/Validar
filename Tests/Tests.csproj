@@ -65,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyExtensions.cs" />
+    <Compile Include="Net4GenericWeavingTaskTests.cs" />
     <Compile Include="ExperimentTest.cs" />
     <Compile Include="TestAssemblyResolver.cs" />
     <Compile Include="ValidationTester.cs" />
@@ -88,6 +89,10 @@
       <Project>{7dec4e2d-f872-434e-a267-0bad65299950}</Project>
       <Name>AssemblyToProcessDotNet4</Name>
     </ProjectReference>
+    <ProjectReference Include="..\AssemblyToProcess\AssemblyToProcessGenericDotNet4.csproj">
+      <Project>{6021a469-19b4-427a-9234-8d0e0279a90c}</Project>
+      <Name>AssemblyToProcessGenericDotNet4</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AssemblyToProcess\AssemblyToProcessSilverlight5.csproj">
       <Project>{f1bafce8-5cfb-4029-b943-3481cda40983}</Project>
       <Name>AssemblyToProcessSilverlight5</Name>
@@ -95,6 +100,10 @@
     <ProjectReference Include="..\Fody\Fody.csproj">
       <Project>{C3578A7B-09A6-4444-9383-0DEAFA4958BD}</Project>
       <Name>Fody</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ReferenceAssemblyDotNet4\ReferenceAssemblyDotNet4.csproj">
+      <Project>{14061293-3f42-42ba-a9b7-1ee00ae6c9c6}</Project>
+      <Name>ReferenceAssemblyDotNet4</Name>
     </ProjectReference>
     <ProjectReference Include="..\ReferenceAssembly\ReferenceAssembly.csproj">
       <Project>{b5aeb0e8-28f4-4955-a055-9c200f7113f0}</Project>

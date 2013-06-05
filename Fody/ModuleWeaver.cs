@@ -76,7 +76,7 @@ public partial class ModuleWeaver
         if(def != null)
         {
             var attribute = def.CustomAttributes.First(x => x.Constructor.DeclaringType.Name == "InjectValidationAttribute");
-            return attribute.AttributeType.Module.GetTypes().Where(x => x.IsClass).ToList();
+            return AssemblyResolver.Resolve(attribute.AttributeType.Scope.Name).MainModule.GetTypes().Where(x => x.IsClass).ToList();
         }
         return null;
     }

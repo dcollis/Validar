@@ -16,6 +16,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nuget", "NuGet\Nuget.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReferenceAssembly", "ReferenceAssembly\ReferenceAssembly.csproj", "{B5AEB0E8-28F4-4955-A055-9C200F7113F0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReferenceAssemblyDotNet4", "ReferenceAssemblyDotNet4\ReferenceAssemblyDotNet4.csproj", "{14061293-3F42-42BA-A9B7-1EE00AE6C9C6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssemblyToProcessGenericDotNet4", "AssemblyToProcess\AssemblyToProcessGenericDotNet4.csproj", "{6021A469-19B4-427A-9234-8D0E0279A90C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -86,6 +90,26 @@ Global
 		{B5AEB0E8-28F4-4955-A055-9C200F7113F0}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{B5AEB0E8-28F4-4955-A055-9C200F7113F0}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{B5AEB0E8-28F4-4955-A055-9C200F7113F0}.Release|x86.ActiveCfg = Release|Any CPU
+		{14061293-3F42-42BA-A9B7-1EE00AE6C9C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14061293-3F42-42BA-A9B7-1EE00AE6C9C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14061293-3F42-42BA-A9B7-1EE00AE6C9C6}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{14061293-3F42-42BA-A9B7-1EE00AE6C9C6}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{14061293-3F42-42BA-A9B7-1EE00AE6C9C6}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{14061293-3F42-42BA-A9B7-1EE00AE6C9C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14061293-3F42-42BA-A9B7-1EE00AE6C9C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14061293-3F42-42BA-A9B7-1EE00AE6C9C6}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{14061293-3F42-42BA-A9B7-1EE00AE6C9C6}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{14061293-3F42-42BA-A9B7-1EE00AE6C9C6}.Release|x86.ActiveCfg = Release|Any CPU
+		{6021A469-19B4-427A-9234-8D0E0279A90C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6021A469-19B4-427A-9234-8D0E0279A90C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6021A469-19B4-427A-9234-8D0E0279A90C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{6021A469-19B4-427A-9234-8D0E0279A90C}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{6021A469-19B4-427A-9234-8D0E0279A90C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6021A469-19B4-427A-9234-8D0E0279A90C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6021A469-19B4-427A-9234-8D0E0279A90C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6021A469-19B4-427A-9234-8D0E0279A90C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{6021A469-19B4-427A-9234-8D0E0279A90C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{6021A469-19B4-427A-9234-8D0E0279A90C}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
