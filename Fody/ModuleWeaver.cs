@@ -24,7 +24,8 @@ public partial class ModuleWeaver
         {
             templateFinder = new ValidationTemplateFinder
                                  {
-                                     AllTypes = allTypes
+                                     AllTypes = allTypes,
+                                     ModuleDefinition = ModuleDefinition
                                  };
             templateFinder.Execute();
         }
@@ -33,7 +34,8 @@ public partial class ModuleWeaver
             var refTypes = GetTypesFromAttributeAssembly(allTypes);
             templateFinder = new ValidationTemplateFinder
                                 {
-                                    AllTypes = refTypes
+                                    AllTypes = refTypes,
+                                    ModuleDefinition = ModuleDefinition
                                 };
             templateFinder.Execute();
         }

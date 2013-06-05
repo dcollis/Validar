@@ -20,7 +20,7 @@ public class Net4GenericWeavingTaskTests : BaseTaskTests
     [Test]
     public void DataErrorInfoWithImplementation()
     {
-        var instance = Assembly.GetInstance("PersonWithImplementation");
+        var instance = Assembly.GetInstance("PersonWithStaticConstructor");
         ValidationTester.TestDataErrorInfo(instance);
     }
 

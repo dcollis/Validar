@@ -85,26 +85,25 @@ public class DataErrorInfoInjector
     {
         foreach (var constructor in TypeDefinition.GetConstructors().Where(c => !c.IsStatic))
         {
-            ProcessConstructor(ValidationTemplateFinder.TemplateConstructor, constructor);
+            ProcessConstructor(ValidationTemplateFinder.TemplateConstructorRef, constructor);
         }
     }
 
-    public void ProcessConstructor(MethodDefinition templateConstructor, MethodDefinition constructor)
+    public void ProcessConstructor(MethodReference templateConstructorRef, MethodDefinition constructor)
     {
         var body = constructor.Body;
         body.SimplifyMacros();
         body.MakeLastStatementReturn();
-        MethodReference mref = templateConstructor.GetElementMethod();
-        if(templateConstructor.DeclaringType.HasGenericParameters)
+        if (templateConstructorRef.DeclaringType.HasGenericParameters)
         {
-            var genericType = templateConstructor.DeclaringType.MakeGenericInstanceType(TypeDefinition.GetElementType());
-            mref = genericType.Resolve().Methods.First().MakeHostInstanceGeneric(TypeDefinition.GetElementType());
+            var genericType = ModuleWeaver.ModuleDefinition.Import(templateConstructorRef.DeclaringType.MakeGenericInstanceType(TypeDefinition.GetElementType()));
+            templateConstructorRef = ModuleWeaver.ModuleDefinition.Import(genericType.Resolve().Methods.First().MakeHostInstanceGeneric(TypeDefinition.GetElementType()));
         }
         
         body.Instructions.BeforeLast(
             Instruction.Create(OpCodes.Ldarg_0),
             Instruction.Create(OpCodes.Ldarg_0),
-            Instruction.Create(OpCodes.Newobj, mref),
+            Instruction.Create(OpCodes.Newobj, templateConstructorRef),
             Instruction.Create(OpCodes.Stfld, validationTemplateField)
             );
         body.OptimizeMacros();

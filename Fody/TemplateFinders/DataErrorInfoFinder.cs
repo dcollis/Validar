@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using System.Linq;
 using Mono.Cecil;
 
@@ -16,13 +17,14 @@ public class DataErrorInfoFinder
     public void Execute()
     {
         var interfaces = ValidationTemplateFinder.TypeDefinition.Interfaces;
-         InterfaceRef = interfaces.FirstOrDefault(x => x.Name == "IDataErrorInfo");
-        if (InterfaceRef == null)
+        var interfaceRef = interfaces.FirstOrDefault(x => x.Name == "IDataErrorInfo");
+        if (interfaceRef == null)
         {
             Found = false;
             return;
         }
-        var interfaceType = InterfaceRef.Resolve();
+        InterfaceRef = ModuleDefinition.Import(typeof (IDataErrorInfo));
+        var interfaceType = interfaceRef.Resolve();
 
         ErrorProperty = interfaceType.Properties.First(x => x.Name == "Error");
         ItemProperty = interfaceType.Properties.First(x => x.Name == "Item");
